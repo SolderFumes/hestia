@@ -19,4 +19,4 @@ headers = {
 
 
 def post_api(url, data):
-    post(base_url + url, headers=headers, json=data)
+    return post(base_url + url, headers=headers, json=data)
