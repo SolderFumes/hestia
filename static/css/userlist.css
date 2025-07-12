@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap');
+body {
+    font-family: "Inter", sans-serif;
+}
+
+
+.button {
+    background-color:pink;
+    max-width: fit-content;
+    border-radius: 15px;
+    display: flex;
+    margin: auto;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.button:hover {
+    filter:brightness(125%);
+    transform: scale(1.1);
+}
+
+.button p {
+    font-size: 11.5pt;
+    margin: 5px;
+    padding: 5px;
+}
