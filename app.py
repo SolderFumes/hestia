@@ -46,3 +46,8 @@ def greet():
     else:
            name = request.form['name']
            return f'Hello, {name}'
+def main():
+    app.run()
+
+if __name__ == '__main__':
+    main()

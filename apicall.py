@@ -1,6 +1,6 @@
 import threading
 from requests import get, post
-from secrets import secrets
+from hestiasecrets import secrets
 from cv import FaceRecognition, face_confidence
 
 #

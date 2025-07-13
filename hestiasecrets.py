@@ -1,0 +1,3 @@
+secrets = {
+    'homeassistant_api_key' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiI4NjE3ZmZhYzZhOTY0ZjUzYjhkYjhmN2E4OWZhMjZmYSIsImlhdCI6MTc0ODkwNzcyMywiZXhwIjoyMDY0MjY3NzIzfQ.ToBY5QhcKakT6L6OxVdX-WO8cIpPEJqlmblTa1yAq0A'
+}
