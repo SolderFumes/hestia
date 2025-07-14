@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:400,500,600,700,800,900&display=swap');
 body {
     font-family: "Inter", sans-serif;
+    width: 100%;
 }
 
 
@@ -24,4 +25,26 @@ body {
     font-size: 11.5pt;
     margin: 5px;
     padding: 5px;
+}
+
+.createContainer {
+
+}
+
+.userBox {
+    border: 3px black solid;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.userBox img {
+    width: 75%;
+    margin: auto;
+}
+
+.userDetails {
+    text-align: center;
 }

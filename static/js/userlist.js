@@ -28,9 +28,8 @@ function user_popup() {
     createForm.appendChild(songInput);
 
     let lightInput = document.createElement('input');
-    lightInput.type = 'number';
     lightInput.name = 'light_color';
-    lightInput.placeholder = 'Light Color (r, g ,b)...';
+    lightInput.placeholder = 'R (0-255), G (0-255), B (0-255)';
     createForm.appendChild(lightInput);
 
     let submit = document.createElement('input');

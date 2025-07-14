@@ -19,14 +19,12 @@
         <ul>
             <h1>Users</h1>
             {% for user in users %}
-                <div class="userbox">
-                    <div class="userpic">
-                        <img src="{{ user.img }}">
-                        <div class="userdetails">
-                            <p>{{ user.name }}</p>
-                            <p>{{ user.song_url }}</p>
-                            <p>{{ user.light_color }}</p>
-                        </div>
+                <div class="userBox">
+                    <img src="{{ user.img }}">
+                    <div class="userDetails">
+                        <p>{{ user.name }}</p>
+                        <p>{{ user.song_url }}</p>
+                        <p>{{ user.light_color }}</p>
                     </div>
                 </div>
             {% endfor %}
