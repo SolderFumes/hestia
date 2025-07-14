@@ -3,6 +3,9 @@
 # Created: Jun 2 2025
 # i havent really decided on signiatures but who gaf LOL
 from cv import FaceRecognition, face_confidence
+from db import get_user
+from spotifyapi import get_song
+import app
 import threading
 import sys
 import time
@@ -20,6 +23,10 @@ fr = FaceRecognition()
 t1 = threading.Thread(target=fr.run_recognition)
 t1.start()
 
+# Start Flask Webserver
+t2 = threading.Thread(target=app.main)
+t2.start()
+
 presence = False
 # Check the presence every 5 seconds
 def presence_check():
@@ -29,41 +36,50 @@ def presence_check():
         print(presence)
         time.sleep(1)
 
-t2 = threading.Thread(target=presence_check)
-t2.daemon = True
-t2.start()
+t3 = threading.Thread(target=presence_check)
+t3.daemon = True
+t3.start()
 
 last_reg_time = None 
 seconds_since_last_reg = lambda: (datetime.now() - last_reg_time).total_seconds()
 
 
 
-light_data = {'entity_id': 'light.lukafloodlight'}
 announce_data = {
     'entity_id': 'media_player.sonos_roam',
     'announce': 'true',
-    'media_content_id': f'media-source://tts/cloud?message="Welcome, Luka. Now playing Sling by Clairo."' ,
-    # maybe make a "preference" object and have the name and song name be like preference.name and preference.song_name
+    'media_content_id': f'media-source://tts/cloud?message="Welcome, User. Now playing Sling by Clairo."' ,
     'media_content_type': 'music'
 }
 goodbye_data = announce_data.copy()
-goodbye_data['media_content_id'] = f'media-source://tts/cloud?message="Goodbye! Turning off everything smiley face."'
 song_data = announce_data.copy()
 song_data['announce'] = 'false'
 song_data['media_content_id'] = 'https://open.spotify.com/album/32ium7Cxb1Xwp2MLzH2459?si=o5UbpXJfRmqVs8gKCr5b4Q'
 
 
 room_is_on = False
+user_name = None
 # Main loop
 while True:
-    if 'Luka' in fr.get_face_names():
+    # get user if one is detected
+    if fr.get_face_names() != [] and not room_is_on:
+        user_name = fr.get_face_names()[0] # get first person to be detected
+        user = get_user(user_name) # db object
+
+        ### SET DATA ###
+        song_name, song_artist = get_song(user.song_url)
+        r, g, b = user.light_color.split(',')
+        announce_data['media_content_id'] = f'media-source://tts/cloud?message="Welcome, {user_name}. Now playing {song_name} by {song_artist}."'
+        song_data['media_content_id'] = user.song_url
+        light_data = {'entity_id': 'light.lukafloodlight', 'rgb_color': [r,g,b]}
+    
+        ### ACTIVATE SMART HOME ###
         last_reg_time = datetime.now()
-        if not room_is_on:
-            print('turning on stuff...')
-            post_api(light_on_url, light_data)
-            post_api(play_media_url, announce_data)
-            post_api(play_media_url, song_data)
-            room_is_on = True
+        print('turning on stuff...')
+        post_api(play_media_url, announce_data)
+        post_api(light_on_url, light_data)
+        post_api(play_media_url, song_data)
+        room_is_on = True
 # if presence detector says nobody's home, turn everything off
     if room_is_on and not presence and seconds_since_last_reg() > 10:
         print('stopping it all....')

@@ -12,7 +12,7 @@ class User(Base):
     img = Column(String, nullable=False)
     name = Column(String, nullable=False)
     song_url = Column(String)
-    light_color = Column(Integer)
+    light_color = Column(String) # json for r, g, and b
 
 
 # define the "engine" which acts as the python representation of the SQLite file.
@@ -27,6 +27,7 @@ session = Session()
 
 #looks at all of the subclasses of Base (a.k.a all the tables we've created) and issues sqlite CREATE_TABLE commands if they don't already exist.
 Base.metadata.create_all(engine)
+
 
 # functions to be called by other programs
 def add_user(img, name, song_url='',light_color='255'):
@@ -46,6 +47,14 @@ def update_user(uname, **kwargs):
     if 'light_color' in kwargs.keys():
         user.light_color = kwargs['light_color']
     session.commit()
+
+def get_user(name):
+    result = session.query(User).filter_by(name=name).first()
+    if result == None:
+        raise ValueError('User not found')
+    else:
+        return result
+
 
 def get_all_users():
     return session.query(User).all()

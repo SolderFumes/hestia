@@ -9,5 +9,6 @@ A computer-vision powered software package that automates your smart home device
    - ✅ ~Detect when the room no longer has any people in it and disable everything~
 - ✅~Create a web portal and database for profiles~
 - ✅~Run website in non-debug mode~
-- Connect database/website with core FR program in main.py
-- Make web interface pretty
+- Connect database/website with core FR program in main.py (UNTESTED BUT HOPEFULLY DONE)
+- Make web interface pretty (in progress)
+- Verify song_url is actually a URL
