@@ -10,5 +10,6 @@ A computer-vision powered software package that automates your smart home device
 - ✅~Create a web portal and database for profiles~
 - ✅~Run website in non-debug mode~
 - Connect database/website with core FR program in main.py (UNTESTED BUT HOPEFULLY DONE)
-- Make web interface pretty (in progress)
-- Verify song_url is actually a URL
+- ✅ ~Make web interface pretty (in progress)~
+- ✅ ~Verify song_url is actually a URL~
+- Display Spotify song/album/playlist thumbnails in userList
