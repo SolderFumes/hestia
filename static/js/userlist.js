@@ -1,46 +1,49 @@
 let createButton = document.getElementById('createButton');
+let createContainer = document.getElementById('createContainer');
+let submitButton = document.getElementById('submit')
+let tenMB = 10000000
 createButton.onclick = user_popup;
 
 function user_popup() {
-    let createContainer = document.createElement('div');
-    createContainer.className = 'createContainer'
-    document.body.appendChild(createContainer);
-
-    let createForm = document.createElement('form');
-    createForm.method = 'POST';
-    createForm.enctype = 'multipart/form-data';
-    createContainer.appendChild(createForm);
-
-
-    let uploadPicture = document.createElement('input');
-    uploadPicture.type = 'file';
-    uploadPicture.name = 'img';
-    uploadPicture.required = true;
-    createForm.appendChild(uploadPicture);
-
-    let nameInput = document.createElement('input');
-    nameInput.name = 'name';
-    nameInput.placeholder = 'Name...';
-    nameInput.required = true;
-    createForm.appendChild(nameInput);
-
-    let songInput = document.createElement('input');
-    songInput.name = 'song_url';
-    songInput.type = 'url';
-    songInput.placeholder = 'https://spotify.com/example';
-    songInput.pattern = 'https://.*'
-    songInput.required = true;
-    createForm.appendChild(songInput);
-
-    let lightInput = document.createElement('input');
-    lightInput.name = 'light_color';
-    lightInput.required = true;
-    lightInput.placeholder = 'R (0-255), G (0-255), B (0-255)';
-    lightInput.pattern = '.{1,3},.{1,3},.{1,3}';
-    createForm.appendChild(lightInput);
-
-    let submit = document.createElement('input');
-    submit.type = 'submit';
-    submit.className = 'submit';
-    createForm.appendChild(submit);
+    createContainer.style.display = 'flex';
 }
+
+const uploadBox = document.getElementById('upload_box');
+const fileInput = document.getElementById('file_input');
+
+//add two event listeners, toggle CSS class for drag-over
+['dragenter', 'dragover'].forEach(eventType => { 
+    uploadBox.addEventListener(eventType, event => {
+        event.preventDefault();
+        uploadBox.classList.add('drag-over'); // uploadBox is being dragged-over rn
+    });
+});
+
+//un-toggle css class 
+['dragleave'].forEach(eventType => {
+    uploadBox.addEventListener(eventType, event => {
+        event.preventDefault();
+    });
+});
+
+uploadBox.addEventListener('drop', event => {
+    event.preventDefault();
+    uploadBox.classList.remove('drag-over');
+    if (event.dataTransfer.files.length > 0) {
+        fileInput.files = event.dataTransfer.files;
+    }
+});
+
+fileInput.addEventListener('change', event => {
+    let nameP = document.getElementById("fileName");
+    let file = fileInput.files[0];
+    if (file.size > tenMB) {
+        nameP.innerText = `${file.name} is too big (${(file.size / 1024 / 1024).toFixed(3)} MB)! Max file size is 10 MB.`
+        uploadBox.classList.add('error');
+        submitButton.disabled = true;
+    } else {
+        uploadBox.classList.remove('error');
+        nameP.innerText = `${file.name} ${(file.size / 1024 / 1024).toFixed(3)} MB`
+        submitButton.disabled = false;
+    }
+});
