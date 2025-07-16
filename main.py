@@ -67,9 +67,8 @@ while True:
         user = get_user(user_name) # db object
 
         ### SET DATA ###
-        song_name, song_artist = get_song(user.song_url)
         r, g, b = user.light_color.split(',')
-        announce_data['media_content_id'] = f'media-source://tts/cloud?message="Welcome, {user_name}. Now playing {song_name} by {song_artist}."'
+        announce_data['media_content_id'] = f'media-source://tts/cloud?message="Welcome, {user.name}. Now playing {user.song_name} by {user.song_artist}."'
         song_data['media_content_id'] = user.song_url
         light_data = {'entity_id': 'light.lukafloodlight', 'rgb_color': [r,g,b]}
     

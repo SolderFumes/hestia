@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+from spotifyapi import get_song
 
 Base = declarative_base() # Base is a class that will track all of the tables we create and allows us to create new tables by subclassing it.
 
@@ -12,6 +13,9 @@ class User(Base):
     img = Column(String, nullable=False)
     name = Column(String, nullable=False)
     song_url = Column(String)
+    song_cover_url = Column(String)
+    song_artist = Column(String)
+    song_name = Column(String)
     light_color = Column(String) # json for r, g, and b
 
 
@@ -33,12 +37,10 @@ Base.metadata.create_all(engine)
 def add_user(img, name, song_url='',light_color='255'):
     # if user does not already exist, create them
     if session.query(User).filter_by(name=name).first() == None:
-        user_to_add = User(img=img, name=name, song_url=song_url, light_color=light_color)
-        print('created user')
+        song_name, song_artist, song_cover_url = get_song(song_url)
+        user_to_add = User(img=img, name=name, song_url=song_url, song_cover_url=song_cover_url, song_artist=song_artist, song_name=song_name, light_color=light_color)
         session.add(user_to_add)
-        print('added user')
         session.commit()
-        print('committed user add')
 
 def update_user(uname, **kwargs):
     user = session.query(User).filter_by(name=uname).first()

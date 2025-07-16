@@ -29,7 +29,7 @@ def users():
         image.save(os.path.join(app.static_folder, 'uploads', filename))
         img = f'/static/uploads/{filename}'
         add_user(img, name, song_url, light_color)
-        
+
         rows = get_all_users()
         return render_template('userlist.html', users=rows)
 

@@ -23,8 +23,9 @@
                     <img src="{{ user.img }}">
                     <div class="userDetails">
                         <p>{{ user.name }}</p>
-                        <p>{{ user.song_url }}</p>
-                        <p>{{ user.light_color }}</p>
+                        <img src="{{ user.song_cover_url }}">
+                        <p>{{ user.song_name }} by {{ user.song_artist }}</p>
+                        <p style="color: rgb( {{ user.light_color }})">Light Color <br>███████████<br>({{ user.light_color }})</p>
                     </div>
                 </div>
             {% endfor %}

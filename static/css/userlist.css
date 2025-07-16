@@ -91,6 +91,15 @@ body {
     display: inline-flex;
 }
 
+.userDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.userDetails p, .userDetails img {
+    margin: 1rem;
+}
+
 .userBox {
     border: 3px black solid;
     border-radius: 5px;
