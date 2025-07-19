@@ -79,6 +79,7 @@ while True:
         print('announce:',announce_data)
         song_data['media_content_id'] = user.song_url
         light_data = {'entity_id': 'light.lukafloodlight', 'rgb_color': [r,g,b]}
+        goodbye_data['media_content_id'] = f'media-source://tts/cloud?message="Goodbye, {user.name}! Have a good one!"'
     
         ### ACTIVATE SMART HOME ###
         last_reg_time = datetime.now()
