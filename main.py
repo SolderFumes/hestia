@@ -69,6 +69,7 @@ while True:
         ### SET DATA ###
         r, g, b = user.light_color.split(',')
         announce_data['media_content_id'] = f'media-source://tts/cloud?message="Welcome, {user.name}. Now playing {user.song_name} by {user.song_artist}."'
+        print('announce:',announce_data)
         song_data['media_content_id'] = user.song_url
         light_data = {'entity_id': 'light.lukafloodlight', 'rgb_color': [r,g,b]}
     

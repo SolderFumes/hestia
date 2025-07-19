@@ -16,6 +16,12 @@ body {
     transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+.delButtonDiv {
+    background-color: #DC2525;
+    outline: inherit;
+
+}
+
 .button:hover {
     filter:brightness(125%);
     transform: scale(1.1);

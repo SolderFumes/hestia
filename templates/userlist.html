@@ -27,6 +27,9 @@
                         <p>{{ user.song_name }} by {{ user.song_artist }}</p>
                         <p style="color: rgb( {{ user.light_color }})">Light Color <br>███████████<br>({{ user.light_color }})</p>
                     </div>
+                    <div class="button delButtonDiv">
+                        <p class="delButton" data-user_name="{{ user.name }}">Delete User 🗑️</p>
+                    </div>
                 </div>
             {% endfor %}
         </div>

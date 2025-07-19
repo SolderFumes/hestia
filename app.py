@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, request
-from db import add_user, update_user, get_all_users
+from db import add_user, update_user, del_user, get_all_users
 
 # base application object
 app = Flask(__name__)
@@ -10,13 +10,13 @@ app = Flask(__name__)
 def home():
     return '<h1>Hestia Home</h1>'
 
-@app.route('/userlist', methods=['GET', 'POST'])
+@app.route('/userlist', methods=['GET', 'POST', 'DELETE'])
 def users():
     if request.method == 'GET':
         rows = get_all_users() # list of User objects
         # render_template will render a jinja template, which is basically an HTML file with extra functionality.
         return render_template('userlist.html', users=rows)
-    else:
+    elif request.method == 'POST':
         # request will have all required fields for a user
         if not {'name', 'song_url', 'light_color'} & request.form.keys():
             return None
@@ -32,6 +32,14 @@ def users():
 
         rows = get_all_users()
         return render_template('userlist.html', users=rows)
+    elif request.method == 'DELETE':
+        data = request.get_json()
+        user_name = data['user_name']
+        del_user(user_name)
+
+        rows = get_all_users()
+        return render_template('userlist.html', users=rows)
+
 
 @app.route('/greet', methods=['GET', 'POST'])
 def greet():

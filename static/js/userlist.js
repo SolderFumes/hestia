@@ -47,3 +47,19 @@ fileInput.addEventListener('change', event => {
         submitButton.disabled = false;
     }
 });
+
+document.querySelectorAll('.delButton').forEach(button => {
+    button.addEventListener('click', async () => {
+        const userName = button.dataset.user_name;
+        const res = await fetch('/userlist', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_name: userName})
+        });
+        if (res.ok) {
+            location.reload();
+        }
+    });
+});

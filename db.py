@@ -57,6 +57,10 @@ def get_user(name):
     else:
         return result
 
+def del_user(name):
+    session.delete(session.query(User).filter_by(name=name).first())
+    session.commit()
+
 
 def get_all_users():
     return session.query(User).all()
