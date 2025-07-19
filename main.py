@@ -17,6 +17,10 @@ get_presence_url = 'states/binary_sensor.presence_detector_occupancy'
 light_on_url = 'services/light/turn_on'
 light_off_url = 'services/light/turn_off'
 play_media_url = 'services/media_player/play_media'
+shuffle_url = 'services/media_player/shuffle_set'
+
+# set this in the DB later (haha not now hashtag restful queen)
+shuffle = True
 
 # Start facial recognition in a thread
 fr = FaceRecognition()
@@ -48,8 +52,12 @@ seconds_since_last_reg = lambda: (datetime.now() - last_reg_time).total_seconds(
 announce_data = {
     'entity_id': 'media_player.sonos_roam',
     'announce': 'true',
-    'media_content_id': f'media-source://tts/cloud?message="Welcome, User. Now playing Sling by Clairo."' ,
+    'media_content_id': f'media-source://tts/cloud?message="Error. Announce Data has not been modified."' ,
     'media_content_type': 'music'
+}
+shuffle_data = {
+    'entity_id': 'media_player.sonos_roam',
+    'shuffle': 'true'
 }
 goodbye_data = announce_data.copy()
 song_data = announce_data.copy()
@@ -79,6 +87,9 @@ while True:
         post_api(play_media_url, announce_data)
         post_api(light_on_url, light_data)
         post_api(play_media_url, song_data)
+        if shuffle:
+            print('call me cupid cause im shuffling')
+            post_api(shuffle_url, shuffle_data)
         room_is_on = True
 # if presence detector says nobody's home, turn everything off
     if room_is_on and not presence and seconds_since_last_reg() > 10:

@@ -14,3 +14,4 @@ A computer-vision powered software package that automates your smart home device
 - ✅ ~Verify song_url is actually a URL~
 - ✅~Display Spotify song/album/playlist thumbnails in userList~
 - Allow modification of users through frontend interface
+- Add shuffle button to frontend
