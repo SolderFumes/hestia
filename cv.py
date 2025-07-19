@@ -51,7 +51,7 @@ class FaceRecognition:
             ret, frame = video_capture.read()
             
             if self.process_current_frame:
-                small_frame = cv.resize(frame, (0, 0), fx=0.25, fy=0.25)
+                small_frame = cv.resize(frame, (0, 0), fx=0.5, fy=0.5)
                 rgb_small_frame = cv.cvtColor(small_frame, cv.COLOR_BGR2RGB)
 
 
@@ -80,10 +80,10 @@ class FaceRecognition:
             # display annotations
 
             for (top, right, bottom, left), name, in zip(self.face_locations, self.face_names):
-                top *= 4
-                right *= 4
-                bottom *= 4
-                left *= 4
+                top *= 2
+                right *= 2
+                bottom *= 2
+                left *= 2
 
                 cv.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
                 cv.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), -1)

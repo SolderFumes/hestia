@@ -37,7 +37,6 @@ def presence_check():
     global presence
     while True:
         presence = True if get_api(get_presence_url).json().get('state') == 'on' else False
-        print(presence)
         time.sleep(1)
 
 t3 = threading.Thread(target=presence_check)
