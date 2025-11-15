@@ -73,6 +73,8 @@ while True:
     # get user if one is detected
     if fr.get_face_names() != [] and not room_is_on:
         user_name = fr.get_face_names()[0] # get first person to be detected
+        if user_name == 'Unknown':
+            continue
         user = get_user(user_name) # db object
 
         ### SET DATA ###
