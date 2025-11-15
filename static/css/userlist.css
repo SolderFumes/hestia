@@ -103,7 +103,9 @@ body {
 }
 
 .userDetails p, .userDetails img {
-    margin: 1rem;
+    width: fit-content;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
 .userBox {

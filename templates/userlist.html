@@ -22,10 +22,16 @@
                 <div class="userBox">
                     <img src="{{ user.img }}">
                     <div class="userDetails">
-                        <p>{{ user.name }}</p>
-                        <img src="{{ user.song_cover_url }}">
-                        <p>{{ user.song_name }} by {{ user.song_artist }}</p>
-                        <p style="color: rgb( {{ user.light_color }})">Light Color <br>███████████<br>({{ user.light_color }})</p>
+                        <div style="padding: 1rem;">
+                            <p class="user_name">{{ user.name }}</p>
+                        </div>
+                        <div style="padding: 1rem">
+                            <img class="song_cover" src="{{ user.song_cover_url }}">
+                            <p class="song_name">{{ user.song_name }} by {{ user.song_artist }}</p>
+                        </div>
+                        <div style="padding: 1rem">
+                            <p class="color_selector" style="color: rgb( {{ user.light_color }})">Light Color <br>███████████<br>({{ user.light_color }})</p>
+                        </div>
                     </div>
                     <div class="button delButtonDiv">
                         <p class="delButton" data-user_name="{{ user.name }}">Delete User 🗑️</p>
@@ -51,6 +57,7 @@
                     <input name="name" placeholder="John Example" required>
                     <input name="song_url" type="url" placeholder="https://spotify.com/example" pattern="https://.*" required>
                     <input name="light_color" placeholder="RGB (0-255, 0-255, 0-255)" pattern=".{1,3},.{1-3},.{1-3}" required>
+                    <input name="type" value="create_user" style="display: none">
                 </div>
                 <div class="submitDiv">
                     <input id="submit" class="submit" type="submit" disabled value="Create User">

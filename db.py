@@ -16,7 +16,7 @@ class User(Base):
     song_cover_url = Column(String)
     song_artist = Column(String)
     song_name = Column(String)
-    light_color = Column(String) # json for r, g, and b
+    light_color = Column(String) # r,g,b
 
 
 # define the "engine" which acts as the python representation of the SQLite file.
@@ -44,8 +44,12 @@ def add_user(img, name, song_url='',light_color='255'):
 
 def update_user(uname, **kwargs):
     user = session.query(User).filter_by(name=uname).first()
+    if 'name' in kwargs.keys():
+        user.name = kwargs['name']
     if 'song_url' in kwargs.keys():
         user.song_url = kwargs['song_url']
+        # unpack get_song values into our user
+        user.song_name, user.song_artist, user.song_cover_url = get_song(kwargs['song_url'])
     if 'light_color' in kwargs.keys():
         user.light_color = kwargs['light_color']
     session.commit()
