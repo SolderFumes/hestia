@@ -13,9 +13,11 @@ from datetime import datetime
 from apicall import post_api, get_api
 from reset import reset_all
 
-get_presence_url = 'states/binary_sensor.presence_detector_occupancy'
+get_presence_url = 'states/binary_sensor.human_presence_detector'
 light_on_url = 'services/light/turn_on'
 light_off_url = 'services/light/turn_off'
+plug_on_url = 'services/switch/turn_on'
+plug_off_url = 'services/switch/turn_off'
 play_media_url = 'services/media_player/play_media'
 shuffle_url = 'services/media_player/shuffle_set'
 
@@ -78,7 +80,9 @@ while True:
         announce_data['media_content_id'] = f'media-source://tts/cloud?message="Welcome, {user.name}. Now playing {user.song_name} by {user.song_artist}."'
         print('announce:',announce_data)
         song_data['media_content_id'] = user.song_url
-        light_data = {'entity_id': 'light.lukafloodlight', 'rgb_color': [r,g,b]}
+        light_data = {'entity_id': 'light.big_lamp', 'rgb_color': [r,g,b]}
+        plug1_data = {'entity_id': 'switch.under_desk_outlet_switch'} 
+        plug2_data = {'entity_id': 'switch.under_desk_outlet_switch_2'}
         goodbye_data['media_content_id'] = f'media-source://tts/cloud?message="Goodbye, {user.name}! Have a good one!"'
     
         ### ACTIVATE SMART HOME ###
@@ -87,6 +91,8 @@ while True:
         post_api(play_media_url, announce_data)
         post_api(light_on_url, light_data)
         post_api(play_media_url, song_data)
+        post_api(plug_on_url, plug1_data)
+        post_api(plug_on_url, plug2_data)
         if shuffle:
             print('call me cupid cause im shuffling')
             post_api(shuffle_url, shuffle_data)

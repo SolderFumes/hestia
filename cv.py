@@ -71,6 +71,7 @@ class FaceRecognition:
 
                     if matches[best_match_index]:
                         name = self.known_face_names[best_match_index]
+                        print(name)
                         confidence = face_confidence(face_distances[best_match_index])
 
                     self.face_names.append(f'{name} ({confidence})')
@@ -79,17 +80,17 @@ class FaceRecognition:
 
             # display annotations
 
-            for (top, right, bottom, left), name, in zip(self.face_locations, self.face_names):
-                top *= 2
-                right *= 2
-                bottom *= 2
-                left *= 2
-
-                cv.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
-                cv.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), -1)
-                cv.putText(frame, name, (left + 6, bottom - 6), cv.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
-            cv.imshow('Face Recognition', frame)
-
+#            for (top, right, bottom, left), name, in zip(self.face_locations, self.face_names):
+#                top *= 2
+#                right *= 2
+#                bottom *= 2
+#                left *= 2
+#
+#                cv.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
+#                cv.rectangle(frame, (left, bottom - 35), (right, bottom), (0, 0, 255), -1)
+#                cv.putText(frame, name, (left + 6, bottom - 6), cv.FONT_HERSHEY_DUPLEX, 0.8, (255, 255, 255), 1)
+#            cv.imshow('Face Recognition', frame)
+#
             if cv.waitKey(1) == ord('q'):
                 break
 
