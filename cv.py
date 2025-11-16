@@ -73,8 +73,9 @@ class FaceRecognition:
                         name = self.known_face_names[best_match_index]
                         print(name)
                         confidence = face_confidence(face_distances[best_match_index])
+                        # do NOT do this outside of the loop. If an unknown face is stuck in a frame, face_names will have unknown forever. We don't care if someone is there that we don't know, so don't put unknown!
+                        self.face_names.append(f'{name} ({confidence})')
 
-                    self.face_names.append(f'{name} ({confidence})')
 
             self.process_current_frame = not self.process_current_frame
 
