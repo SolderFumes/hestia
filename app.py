@@ -19,9 +19,6 @@ def users():
     elif request.method == 'POST':
         match request.form['type']:
             case 'create_user':
-                #data validation
-                if not {'name', 'song_url', 'light_color'} in request.form.keys():
-                    return None
                 name = request.form['name']
                 song_url = request.form['song_url']
                 light_color = request.form['light_color']

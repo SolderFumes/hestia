@@ -57,7 +57,7 @@ def update_user(uname, **kwargs):
 def get_user(name):
     result = session.query(User).filter_by(name=name).first()
     if result == None:
-        raise ValueError('User not found')
+        raise ValueError(f'User \'{name}\' not found')
     else:
         return result
 

@@ -71,7 +71,7 @@ user_name = None
 # Main loop
 while True:
     # get user if one is detected
-    if fr.get_face_names() != [] and not room_is_on:
+    if len(fr.get_face_names()) > 0 and not room_is_on:
         user_name = fr.get_face_names()[0] # get first person to be detected
         if user_name == 'Unknown':
             continue
