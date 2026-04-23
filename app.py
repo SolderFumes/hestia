@@ -73,20 +73,6 @@ def users():
         rows = get_all_users()
         return render_template('userlist.html', users=rows)
 
-
-@app.route('/greet', methods=['GET', 'POST'])
-def greet():
-    #request is a 'global proxy'. We import it from Flask and it keeps tracks of every request that comes in. Every time a request comes in, Flask pushes a Request object onto the stack. Whenever we call something from request, Flask takes the item at the top of the stack and that is what we are acting on. After the request is handled, the object is popped off the stack to ensure no bleed-over.
-    if request.method == 'GET':
-        return '''
-            <form method="POST">
-                <input name="name" placeholder="Your name">
-                <button>Go</button>
-            </form>
-        '''
-    else:
-           name = request.form['name']
-           return f'Hello, {name}'
 def main():
     app.run(host='0.0.0.0')
 

@@ -68,36 +68,3 @@ def del_user(name):
 
 def get_all_users():
     return session.query(User).all()
-
-
-# *** CRUD stuff! ***
-# Create
-#luka = User(name='Luka', song_url='https://open.spotify.com/album/32ium7Cxb1Xwp2MLzH2459?si=o5UbpXJfRmqVs8gKCr5b4Q', light_color='255')
-#session.add(luka)
-##commit changes!
-#session.commit()
-#
-## Read
-## User is the class representing the User table. 
-#users = session.query(User).all() # list all
-#
-## filter_by(name='Luka') is a method that uses the kwarg of name='luka' to construct a SQL query like this:
-## SELECT * FROM users WHERE name = 'Luka'
-## the .first() retrieves only the first row.
-#luka_user = session.query(User).filter_by(name='Luka').first()
-#luka_song = luka_user.song_url
-#print('Luka\'s song:',luka_song) #
-## Update
-#
-#luka_user.name = 'marica'
-#session.commit()
-#print('The name is now', luka_user.name)
-#
-## Delete
-#
-#session.delete(luka_user)
-#session.commit()
-
-
-
-

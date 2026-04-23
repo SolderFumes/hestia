@@ -1,7 +1,5 @@
-import threading
 from requests import get, post
 from hestiasecrets import secrets
-from cv import FaceRecognition, face_confidence
 
 #
 # <cv.py> ---[RUN FR]-----------------------

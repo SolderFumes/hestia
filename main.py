@@ -4,11 +4,10 @@
 # i havent really decided on signiatures but who gaf LOL
 from cv import FaceRecognition, face_confidence
 from db import get_user
-from spotifyapi import get_song
 import app
 import threading
 import sys
-import time
+from time import sleep
 from datetime import datetime
 from apicall import post_api, get_api
 from reset import reset_all
@@ -39,7 +38,7 @@ def presence_check():
     global presence
     while True:
         presence = True if get_api(get_presence_url).json().get('state') == 'on' else False
-        time.sleep(1)
+        sleep(1)
 
 t3 = threading.Thread(target=presence_check)
 t3.daemon = True
