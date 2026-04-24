@@ -1,10 +1,9 @@
-from hestiasecrets import secrets
+import os
 import spotipy
-import pandas as pd
 from spotipy.oauth2 import SpotifyClientCredentials
 
-client_id = secrets['spotify_client_id']
-client_secret = secrets['spotify_client_secret']
+client_id = os.getenv('spotify_client_id')
+client_secret = os.getenv('spotify_client_secret')
 
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)

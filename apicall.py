@@ -1,5 +1,5 @@
 from requests import get, post
-from hestiasecrets import secrets
+import os
 
 #
 # <cv.py> ---[RUN FR]-----------------------
@@ -7,7 +7,7 @@ from hestiasecrets import secrets
 # <apicall.py> ---[CALL API BASED ON ARG]--- 
 #
 
-api_key = secrets.get('homeassistant_api_key')
+api_key = os.getenv('homeassistant_api_key')
 base_url = 'http://homeassistant.local:8123/api/'
 headers = {
     'authorization': f'Bearer {api_key}',
