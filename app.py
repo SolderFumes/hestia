@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from db import add_user, update_user, del_user, get_all_users
+from actions import actions_pretty
 
 # base application object
 app = Flask(__name__)
@@ -9,6 +10,11 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return '<h1>Hestia Home</h1><a href=/userlist>User List</a>'
+
+
+@app.route('/actions')
+def actions():
+    return render_template('actions.html', actions_list=actions_pretty('actions.json'))
 
 @app.route('/userlist', methods=['GET', 'POST', 'DELETE'])
 def users():

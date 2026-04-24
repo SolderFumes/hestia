@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<div>
+	<table>
+		<!--We want to create a row for every entry in actions_dict.
+			We will write the entire json every time there is an update. We will need to create a row with a form inside of it. The form will be horizontal and contain a <select form=form_id> and a <input> That is just to put the entity id into. We will then need a simple <input type=submit>. That we can style as a plus. We will pre-fill the value with our already known stuff inside our FOR and thhen create an independent table row outside of our FOR that will always be there :)  -->
+			<form id=actions_form>
+				{% for entity_type, entity_id in actions_list %}
+				<tr>
+					<select form="actions_form" name="entity_type{{loop.index0}}">
+						<option value="">--Select an Option--</option>
+						<option {% if entity_type.capitalize() == 'Light' %} selected {% endif %}>Light</option>
+						<option {% if entity_type.capitalize() == 'Switch' %} selected {% endif %}>Switch</option>
+						<option {% if entity_type.capitalize() == 'Media player' %} selected {% endif %}>Media Player</option>
+					</select>
+					<input value={{entity_id}} type="text" name="entity_id{{loop.index0}}"></input>
+				</tr>
+				<br>
+				{% endfor %}
+				<tr>
+					<select form="actions_form" name="type">
+						<option>Light</option>
+						<option>Switch</option>
+						<option>Media Player</option>
+					</select>
+					<input type="text" name="entity_id"></input>
+				</tr>
+				<br>
+				<input type="submit"></input>
+			</form>
+	</table>
+</div>
