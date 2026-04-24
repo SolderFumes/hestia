@@ -7,7 +7,7 @@
 				{% for entity_type, entity_id in actions_list %}
 				<tr>
 					<select form="actions_form" name="entity_type{{loop.index0}}">
-						<option value="">--Select an Option--</option>
+						<option hidden disabled value="">--Select an Option--</option>
 						<option {% if entity_type.capitalize() == 'Light' %} selected {% endif %}>Light</option>
 						<option {% if entity_type.capitalize() == 'Switch' %} selected {% endif %}>Switch</option>
 						<option {% if entity_type.capitalize() == 'Media_player' %} selected {% endif %}>Media Player</option>
@@ -19,6 +19,7 @@
 				{% endfor %}
 				<tr>
 					<select form="actions_form" name="type">
+						<option disabled hidden selected>--Select an Option--</option>
 						<option>Light</option>
 						<option>Switch</option>
 						<option>Media Player</option>
