@@ -1,7 +1,7 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from db import add_user, update_user, del_user, get_all_users
-from actions import actions_pretty
+from actions import actions_pretty, add_actions
 
 # base application object
 app = Flask(__name__)
@@ -14,7 +14,40 @@ def home():
 
 @app.route('/actions')
 def actions():
-    return render_template('actions.html', actions_list=actions_pretty('actions.json'))
+    return render_template('actions.html', actions_list=actions_pretty('actions.hst'))
+
+#Let's get the form data and send it off to a helper function is actions.py.
+@app.route('/update_actions', methods=['POST'])
+def update_actions():
+    '''
+    Parses actions from /actions HTML form into a list of tuples
+    with the format: [(URL, entity_id)]
+    '''
+    retlist = []
+    for key, value in request.form.items():
+        url = ''
+        entity_id = value
+        entity_type = value.split('.')[0] # Thi sshould be type
+        match entity_type:
+            case 'light':
+                url = '/services/light/turn_on'
+            case 'media_player':
+                url = '/serices/media_player/play_media'
+            case 'switch':
+                url='services/switch/turn_on'
+            case _:
+                url = f'URL NOT PARSEABLE FOR ENTITY TYPE {entity_type}'
+        retlist.append((url, entity_id))
+    add_actions(retlist)
+
+    return redirect('/actions')
+    #Reconstruct a formatted actions list from the form data.
+
+
+@app.route('/delete_action', methods=['POST'])
+def delete_action():
+    pass
+
 
 @app.route('/userlist', methods=['GET', 'POST', 'DELETE'])
 def users():
