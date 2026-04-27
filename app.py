@@ -9,7 +9,7 @@ app = Flask(__name__)
 # @app.route is a decorator that tells Flask to run the following function when a request for the given path comes in ('/')
 @app.route('/')
 def home():
-    return '<h1>Hestia Home</h1><a href=/userlist>User List</a>'
+    return render_template('index.html')
 
 
 @app.route('/actions')

@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Lexend:400,500,600&display=swap');
+/* Header and Nav Bar */
+body {
+  font-family: "Lexend", sans-serif;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding-top: 1rem;
+}
+
+a, #topper h2
+{
+  color: #99582A;
+  font-weight: 600;
+  /*text-shadow: -0.05rem -0.05rem 0.1rem #99582A, 0.05rem -0.05rem 0.1rem #99582A, -0.05rem 0.05rem 0.1rem #99582A, 0.05rem 0.05rem 0.1rem #99582A, 0.1rem 0.1rem 0.1rem #99582A, 0.15rem 0.15rem 0.1rem #99582A; */
+
+  text-decoration: none;
+  transition: text-shadow 0.3s ease-out 0s;
+}
+
+#topper
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0px;
+  background: rgba(255, 230, 167, 1);
+  backdrop-filter: blur(18px);
+}
+
+#pages, #title
+{
+	display: flex;
+	justify-content: space-between;
+}
+
+#pages, #title
+{
+	gap: 1em;
+}
+
+#pages h2, #title a 
+{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+#title
+{
+	margin-left: 2em;
+}
+
+#pages h2
+{
+	margin-right: 2em;
+}
+
+#title img
+{
+	width: 5em;
+	height: 5em;
+}
