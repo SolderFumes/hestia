@@ -6,7 +6,7 @@
 
 import ast
 
-def get_actions(filename: str = 'actions.hst'):
+def get_actions(filename: str = 'actions.hst') -> list:
     with open(filename, 'r') as file:
         return ast.literal_eval(file.read()) 
 
@@ -70,11 +70,11 @@ def add_actions(data: list, filename: str = 'actions.hst') -> None:
             if original_occurance_dict[entity_id] < occurance_count[entity_id]:
                 # its a new entity occurance, add it! Hand it to handle_new_entity_occurance to see if its a duplicate and add the custom functionality
                 #TODO: handle_new_entity_occurance(entity_id)
-                printf('Entity {entity_id} has more occurances in the form than in our stored version! We are appending it to append_list.')
+                printf(f'Entity {entity_id} has more occurances in the form than in our stored version! We are appending it to append_list.')
                 append_list.append((url, convert_to_default_data((url, entity_id))))
         else:
             # if its a new entity create default data for it
-            print('Entity {entity_id} exists in the form but not in the stored file! Adding it to append_list.')
+            print(f'Entity {entity_id} exists in the form but not in the stored file! Adding it to append_list.')
             append_list.append((url, convert_to_default_data((url, entity_id))))
     current_list = get_actions(filename)
     write_data(current_list + append_list, filename)
@@ -100,7 +100,7 @@ def convert_to_default_data(entity: tuple) -> dict:
 
 def write_data(data: list, filename: str = 'actions.hst'):
     '''
-    Writes string representation of actions list to filename provided
+    Takes a string representation of a hestia-formatted list and writes it to filename.
     '''
     with open(filename, 'w') as file:
         file.write(str(data))

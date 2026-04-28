@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect
 from db import add_user, update_user, del_user, get_all_users
-from actions import actions_pretty, add_actions
+from actions import actions_pretty, add_actions, get_actions, write_data
 
 # base application object
 app = Flask(__name__)
@@ -49,7 +49,12 @@ def update_actions():
 
 @app.route('/delete_action', methods=['POST'])
 def delete_action():
-    pass
+    index_to_delete = int(request.form.get("delete_index"))
+    print("index to delete:", index_to_delete)
+    actions = get_actions()
+    del actions[index_to_delete]
+    write_data(actions)
+    return redirect('/actions')
 
 
 @app.route('/userlist', methods=['GET', 'POST', 'DELETE'])
