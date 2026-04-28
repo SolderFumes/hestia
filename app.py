@@ -27,13 +27,16 @@ def update_actions():
     for key, value in request.form.items():
         url = ''
         entity_id = value
+        # vvv The form keeps sending over the value of the select option and that gets counted as the entity id... for some reason...
+        if entity_id == 'Light' or entity_id == 'Media Player' or entity_id == 'Switch':
+            continue
         entity_type = value.split('.')[0] # Thi sshould be type
         match entity_type:
-            case 'light':
+            case 'light' | 'Light':
                 url = '/services/light/turn_on'
-            case 'media_player':
+            case 'media_player' | 'Media Player':
                 url = '/serices/media_player/play_media'
-            case 'switch':
+            case 'switch' | 'Switch':
                 url='services/switch/turn_on'
             case _:
                 url = f'URL NOT PARSEABLE FOR ENTITY TYPE {entity_type}'
