@@ -1,9 +1,3 @@
-# 1) Open the file
-# 2) Read the data
-# 3) Return the data!
-
-# We can call this function as often as we want because it's just performing file I/O. We'll call this every 5 seconds or so.
-
 import ast
 
 def get_actions(filename: str = 'actions.hst') -> list:
@@ -105,4 +99,21 @@ def write_data(data: list, filename: str = 'actions.hst'):
     with open(filename, 'w') as file:
         file.write(str(data))
 
+def reset_actions(filename: str = 'actions.hst') -> list:
+    '''
+    Parses a hestia-formatted actions file, then returns a list of actions needed
+    to undo the provided actions file.
+    '''
+    actions_list = get_actions(filename)
+    # Every media player turns off the same way. Every light turns off the same way. Ever switch turns off the same way. Yay. 
+    reset_list = []
+    for url, data in actions_list:
+        match url.split('/')[1]: # this is the type
+            case 'light':
+                reset_list.append(('/servies/light/turn_off', {'entity_id': data['entity_id']}))
+            case 'media_player':
+                reset_list.append(('/servies/media_player/media_stop', {'entity_id': data['entity_id']}))
+            case 'switch':
+                reset_list.append(('/servies/switch/turn_off', {'entity_id': data['entity_id']}))
+    return reset_list
 
