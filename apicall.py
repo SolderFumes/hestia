@@ -7,7 +7,7 @@ import os
 # <apicall.py> ---[CALL API BASED ON ARG]--- 
 #
 
-api_key = os.getenv('homeassistant_api_key')
+api_key = os.getenv('HOMEASSISTANT_API_KEY')
 base_url = 'http://homeassistant.local:8123/api/'
 headers = {
     'authorization': f'Bearer {api_key}',

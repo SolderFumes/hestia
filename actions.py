@@ -110,10 +110,10 @@ def reset_actions(filename: str = 'actions.hst') -> list:
     for url, data in actions_list:
         match url.split('/')[1]: # this is the type
             case 'light':
-                reset_list.append(('/servies/light/turn_off', {'entity_id': data['entity_id']}))
+                reset_list.append(('services/light/turn_off', {'entity_id': data['entity_id']}))
             case 'media_player':
-                reset_list.append(('/servies/media_player/media_stop', {'entity_id': data['entity_id']}))
+                reset_list.append(('services/media_player/media_stop', {'entity_id': data['entity_id']}))
             case 'switch':
-                reset_list.append(('/servies/switch/turn_off', {'entity_id': data['entity_id']}))
+                reset_list.append(('services/switch/turn_off', {'entity_id': data['entity_id']}))
     return reset_list
 

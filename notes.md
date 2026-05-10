@@ -9,6 +9,10 @@ There will need to be a function which parses the form from the server and updat
 I think the best way to go about this is to store a file for each registered person. (Myabe auth them?)
 
 # Need to add:
+3) MAKE EVERYTHING TURN OFF FOR REAL
+
+4) Fix light color being 0,0,0 in actions.hst even when i set it to something nicer
+
 5) TEST IT ALL!!
 
 6) create username_actions.hst on account creation :)

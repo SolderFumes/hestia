@@ -22,6 +22,8 @@ t1.start()
 t2 = threading.Thread(target=app.main)
 t2.start()
 
+get_presence_url = 'states/binary_sensor.human_presence_detector'
+
 presence = False
 # Check the presence every 5 seconds
 def presence_check():
@@ -46,6 +48,7 @@ shuffle_data = {
 
 room_is_on = False
 user_name = None
+greeted = False
 # Main loop
 while True:
     # get user if one is detected
@@ -64,10 +67,14 @@ while True:
             # if there's a media player, greet!
             if 'media_player' in url and not greeted:
                 greeted = True
+                print('posting greeting...')
                 post_api(url, {'entity_id': data['entity_id'], 'announce': True, 'media_content_type': 'music', 'media_content_id': f'media-source://tts/cloud?message="Welcome {user_name}!"'})
+                if shuffle:
+                    shuffle_data = {'entity_id': data['entity_id'], 'shuffle': True}
+                    print('posting shuffle...', shuffle_data)
+                    post_api('services/media_player/shuffle_set', shuffle_data)
+            print(f'Posting {url} with data {data}')
             post_api(url, data)
-        if shuffle:
-            post_api(shuffle_url, shuffle_data)
         room_is_on = True
 # if presence detector says nobody's home, turn everything off
     if room_is_on and not presence and seconds_since_last_reg() > 10:
@@ -77,7 +84,8 @@ while True:
         print('stopping it all....')
         ### CALL RESET() FROM ACTIONS BASED ON ACTIONS FILE ###
         reset_list = actions.reset_actions('actions.hst')
-        for url, data in reset_list
+        print('Actions reset list...', reset_list)
+        for url, data in reset_list:
             if 'media_player' in url and not goodbyed:
                 goodbyed = True
                 post_api(url, {'entity_id': data['entity_id'], 'announce': True, 'media_content_type': 'music', 'media_content_id': f'media-source://tts/cloud?message="Goodbye {user_name}. Have a good one!"'})
